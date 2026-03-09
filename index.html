@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oto Elektrik | Randevu Al</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue-deep: #0A1628;
+      --blue-mid: #1A3A6B;
+      --blue-bright: #1D6FE8;
+      --blue-electric: #3B9EFF;
+      --white: #F5F9FF;
+      --gray-light: #E8EFF8;
+      --gray-mid: #8BA4C8;
+      --accent: #FFB800;
+    }
+
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--blue-deep);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(61,158,255,0.15);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem; letter-spacing: 2px;
+  color: var(--white);
+}
+.nav-logo span { color: var(--blue-electric); }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  text-decoration: none; color: var(--gray-mid);
+  font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue-electric); }
+.nav-cta {
+  background: var(--blue-bright); color: #fff;
+  padding: 10px 24px; border-radius: 8px;
+  font-weight: 600; font-size: 0.88rem;
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--blue-electric); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: 
+    radial-gradient(ellipse 60% 60% at 70% 50%, rgba(29,111,232,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(59,158,255,0.1) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+  background-image: 
+    linear-gradient(rgba(59,158,255,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,158,255,1) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content { position: relative; z-index: 1; max-width: 680px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(29,111,232,0.15); border: 1px solid rgba(59,158,255,0.3);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 1px;
+  color: var(--blue-electric); text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--blue-electric);
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(1.5); }
+}
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  line-height: 0.95; letter-spacing: 2px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+h1 em { color: var(--blue-electric); font-style: normal; }
+.hero-sub {
+  margin-top: 24px; font-size: 1.1rem; line-height: 1.7;
+  color: var(--gray-mid); max-width: 480px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+.hero-actions {
+  display: flex; gap: 16px; margin-top: 40px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.btn-primary {
+  background: var(--blue-bright); color: #fff;
+  padding: 14px 32px; border-radius: 10px;
+  font-weight: 700; font-size: 1rem;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 24px rgba(29,111,232,0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(29,111,232,0.55);
+}
+.btn-outline {
+  background: transparent; color: var(--blue-electric);
+  padding: 14px 32px; border-radius: 10px;
+  font-weight: 600; font-size: 1rem;
+  text-decoration: none; border: 1.5px solid rgba(59,158,255,0.4);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--blue-electric); color: #fff; }
+
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 64px;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem; color: var(--white);
+}
+.stat-num span { color: var(--blue-electric); }
+.stat-label { font-size: 0.8rem; color: var(--gray-mid); letter-spacing: 0.5px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── SERVICES ── */
+.section { padding: 100px 48px; }
+.section-label {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--blue-electric);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  letter-spacing: 1px; line-height: 1;
+  margin-bottom: 56px;
+}
+
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.service-card {
+  background: rgba(26,58,107,0.25);
+  border: 1px solid rgba(59,158,255,0.12);
+  border-radius: 16px; padding: 36px 28px;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.service-card:hover {
+  border-color: rgba(59,158,255,0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(29,111,232,0.18);
+}
+.service-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: rgba(29,111,232,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 20px;
+}
+.service-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 10px;
+}
+.service-desc { font-size: 0.9rem; color: var(--gray-mid); line-height: 1.6; }
+.service-price {
+  margin-top: 20px; font-size: 0.85rem;
+  color: var(--blue-electric); font-weight: 600;
+}
+
+/* ── APPOINTMENT ── */
+#randevu { background: rgba(10,22,40,0.6); }
+.appt-wrapper {
+  max-width: 820px; margin: 0 auto;
+  background: rgba(26,58,107,0.2);
+  border: 1px solid rgba(59,158,255,0.15);
+  border-radius: 24px; padding: 56px;
+}
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1 / -1; }
+label {
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--gray-mid); text-transform: uppercase;
+}
+input, select, textarea {
+  background: rgba(10,22,40,0.7);
+  border: 1.5px solid rgba(59,158,255,0.18);
+  border-radius: 10px; padding: 13px 16px;
+  color: var(--white); font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem; outline: none;
+  transition: border-color 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--blue-electric);
+  box-shadow: 0 0 0 3px rgba(59,158,255,0.12);
+}
+select option { background: #0d1f3c; }
+textarea { resize: vertical; min-height: 100px; }
+
+.time-slots {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px;
+}
+.slot {
+  padding: 8px 16px; border-radius: 8px;
+  border: 1.5px solid rgba(59,158,255,0.2);
+  font-size: 0.85rem; font-weight: 500; cursor: pointer;
+  background: transparent; color: var(--gray-mid);
+  transition: all 0.15s;
+}
+.slot:hover, .slot.active {
+  border-color: var(--blue-electric);
+  background: rgba(59,158,255,0.12);
+  color: var(--white);
+}
+.slot.disabled {
+  opacity: 0.3; cursor: not-allowed;
+}
+
+.submit-btn {
+  width: 100%; margin-top: 32px;
+  background: var(--blue-bright); color: #fff;
+  border: none; border-radius: 12px;
+  padding: 16px; font-family: 'Outfit', sans-serif;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(29,111,232,0.4);
+}
+.submit-btn:hover {
+  background: var(--blue-electric);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(59,158,255,0.45);
+}
+
+/* success */
+.success-msg {
+  display: none; text-align: center; padding: 48px 24px;
+}
+.success-msg .check {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(29,111,232,0.15); border: 2px solid var(--blue-electric);
+  font-size: 2rem; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+}
+.success-msg h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+  letter-spacing: 1px; margin-bottom: 10px;
+}
+.success-msg p { color: var(--gray-mid); font-size: 1rem; }
+
+/* ── WHY US ── */
+.why-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-top: 16px;
+}
+.why-card {
+  background: rgba(26,58,107,0.2);
+  border: 1px solid rgba(59,158,255,0.1);
+  border-radius: 14px; padding: 28px 20px; text-align: center;
+}
+.why-icon { font-size: 2rem; margin-bottom: 12px; }
+.why-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 8px;
+}
+.why-desc { font-size: 0.83rem; color: var(--gray-mid); line-height: 1.5; }
+
+/* ── FOOTER ── */
+footer {
+  background: rgba(5,12,25,0.9);
+  border-top: 1px solid rgba(59,158,255,0.1);
+  padding: 40px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 2px;
+}
+.footer-logo span { color: var(--blue-electric); }
+.footer-info { font-size: 0.85rem; color: var(--gray-mid); line-height: 1.8; }
+.footer-copy { font-size: 0.78rem; color: rgba(139,164,200,0.5); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-stats { gap: 28px; flex-wrap: wrap; }
+  .section { padding: 70px 20px; }
+  .appt-wrapper { padding: 32px 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+  footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+}
+
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div class="nav-logo">OTO<span>ELEKTRİK</span></div>
+  <div class="nav-links">
+    <a href="#hizmetler">Hizmetler</a>
+    <a href="#neden-biz">Neden Biz?</a>
+    <a href="#randevu">Randevu</a>
+  </div>
+  <a href="#randevu" class="nav-cta">Randevu Al</a>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="ana-sayfa">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⚡ Profesyonel Oto Elektrik</div>
+    <h1>ARACIN <em>ELEKTRİĞİ</em><br>SORUN DEĞİL</h1>
+    <p class="hero-sub">
+      Deneyimli ekibimizle aracınızın tüm elektrik sorunlarını hızlı, güvenilir ve uygun fiyatla çözüyoruz. Online randevu alın, beklemeden gelin.
+    </p>
+    <div class="hero-actions">
+      <a href="#randevu" class="btn-primary">🗓 Randevu Al</a>
+      <a href="#hizmetler" class="btn-outline">Hizmetlerimiz</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">12<span>+</span></div>
+        <div class="stat-label">Yıllık Deneyim</div>
+      </div>
+      <div>
+        <div class="stat-num">4800<span>+</span></div>
+        <div class="stat-label">Mutlu Müşteri</div>
+      </div>
+      <div>
+        <div class="stat-num">%98<span></span></div>
+        <div class="stat-label">Memnuniyet Oranı</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+
+<section class="section" id="hizmetler">
+  <div class="section-label">Hizmetlerimiz</div>
+  <div class="section-title">NE YAPIYORUZ?</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔋</div>
+      <div class="service-name">Akü Değişimi</div>
+      <p class="service-desc">Tüm marka ve model araçlara uyumlu, orijinal ve garantili akü montajı. Eski akünüzü ücretsiz test ediyoruz.</p>
+      <div class="service-price">→ Hızlı teslimat garantisi</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <div class="service-name">Kablo / Sigorta Tamiri</div>
+      <p class="service-desc">Kablo kopukluğu, sigorta sorunları, kısa devre tespiti ve onarımı. Kalıcı çözüm, garanti kapsamında.</p>
+      <div class="service-price">→ Yerinde tespit ve onarım</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔌</div>
+      <div class="service-name">Araç Elektrikleri</div>
+      <p class="service-desc">Far, stop, klima, cam motoru, merkezi kilit, far ayarı ve tüm elektrik sistemleri bakım ve onarımı.</p>
+      <div class="service-price">→ Komple elektrik taraması</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📡</div>
+      <div class="service-name">Navigasyon / Radyo Montajı</div>
+      <p class="service-desc">Araç içi multimedya, GPS navigasyon, geri görüş kamerası, Carplay / Android Auto kurulum ve montajı.</p>
+      <div class="service-price">→ Profesyonel montaj</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+
+<section class="section" id="neden-biz" style="padding-top:0">
+  <div class="section-label">Fark Yaratan</div>
+  <div class="section-title">NEDEN BİZ?</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🛡️</div>
+      <div class="why-title">Garanti</div>
+      <p class="why-desc">Tüm işlemler garantili. Aynı sorun tekrarlarsa ücretsiz bakıyoruz.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⏱️</div>
+      <div class="why-title">Hızlı Servis</div>
+      <p class="why-desc">Randevu saatine dakik geliyoruz, aracınızı zamanında teslim ediyoruz.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <div class="why-title">Net Fiyat</div>
+      <p class="why-desc">Gizli ücret yok. İşlem başlamadan önce fiyat onayı alıyoruz.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔧</div>
+      <div class="why-title">Uzman Ekip</div>
+      <p class="why-desc">12 yıllık deneyimli teknisyenler, son teknoloji cihazlarla hizmetinizde.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+
+<section class="section" id="randevu">
+  <div class="section-label">Online Randevu</div>
+  <div class="section-title">RANDEVU AL</div>
+  <div class="appt-wrapper">
+
+
+<!-- FORM -->
+<div id="form-area">
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Ad Soyad *</label>
+      <input type="text" id="name" placeholder="Ahmet Yılmaz" />
+    </div>
+    <div class="form-group">
+      <label>Telefon *</label>
+      <input type="tel" id="phone" placeholder="05XX XXX XX XX" />
+    </div>
+    <div class="form-group">
+      <label>Araç Marka / Model *</label>
+      <input type="text" id="car" placeholder="Örn: Ford Focus 2018" />
+    </div>
+    <div class="form-group">
+      <label>Hizmet Seçin *</label>
+      <select id="service">
+        <option value="">-- Seçiniz --</option>
+        <option>Akü Değişimi</option>
+        <option>Kablo / Sigorta Tamiri</option>
+        <option>Araç Elektrikleri</option>
+        <option>Navigasyon / Radyo Montajı</option>
+        <option>Diğer</option>
+      </select>
+    </div>
+    <div class="form-group full">
+      <label>Randevu Tarihi *</label>
+      <input type="date" id="date" />
+    </div>
+    <div class="form-group full">
+      <label>Saat Seçin *</label>
+      <div class="time-slots" id="slots">
+        <button class="slot" onclick="selectSlot(this)">08:00</button>
+        <button class="slot" onclick="selectSlot(this)">09:00</button>
+        <button class="slot" onclick="selectSlot(this)">10:00</button>
+        <button class="slot disabled" disabled>11:00</button>
+        <button class="slot" onclick="selectSlot(this)">12:00</button>
+        <button class="slot disabled" disabled>13:00</button>
+        <button class="slot" onclick="selectSlot(this)">14:00</button>
+        <button class="slot" onclick="selectSlot(this)">15:00</button>
+        <button class="slot" onclick="selectSlot(this)">16:00</button>
+        <button class="slot" onclick="selectSlot(this)">17:00</button>
+      </div>
+    </div>
+    <div class="form-group full">
+      <label>Açıklama (İsteğe bağlı)</label>
+      <textarea id="note" placeholder="Aracınızda gözlemlediğiniz sorunları kısaca anlatın…"></textarea>
+    </div>
+  </div>
+  <button class="submit-btn" onclick="submitForm()">✅ Randevuyu Onayla</button>
+  <p style="text-align:center;font-size:0.8rem;color:var(--gray-mid);margin-top:14px;">
+    * Zorunlu alanlar. Randevunuz onaylandıktan sonra SMS ile bilgilendirileceksiniz.
+  </p>
+</div>
+
+<!-- SUCCESS -->
+<div class="success-msg" id="success">
+  <div class="check">✓</div>
+  <h3>RANDEVUNUZ ALINDI!</h3>
+  <p>En kısa sürede SMS ile onay gönderilecektir.<br>Teşekkür ederiz, sizi bekliyoruz.</p>
+  <button class="submit-btn" onclick="resetForm()" style="margin-top:28px;max-width:240px">
+    Yeni Randevu Al
+  </button>
+</div>
+
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">OTO<span>ELEKTRİK</span></div>
+  <div class="footer-info">
+    📍 Sanayi Mahallesi, Oto Sanayii Caddesi No:14<br>
+    📞 0532 XXX XX XX &nbsp;|&nbsp; ⏰ Hft. içi 08:00 – 18:00
+  </div>
+  <div class="footer-copy">© 2024 OtoElektrik. Tüm hakları saklıdır.</div>
+</footer>
+
+<script>
+  let selectedSlot = null;
+
+  function selectSlot(el) {
+    document.querySelectorAll('.slot').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+    selectedSlot = el.textContent;
+  }
+
+  // Set min date to today
+  const dateInput = document.getElementById('date');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+
+  function submitForm() {
+    const name    = document.getElementById('name').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const car     = document.getElementById('car').value.trim();
+    const service = document.getElementById('service').value;
+    const date    = document.getElementById('date').value;
+
+    if (!name || !phone || !car || !service || !date || !selectedSlot) {
+      alert('Lütfen tüm zorunlu alanları doldurun ve bir saat seçin.');
+      return;
+    }
+
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  }
+
+  function resetForm() {
+    document.getElementById('form-area').style.display = 'block';
+    document.getElementById('success').style.display = 'none';
+    document.getElementById('name').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('car').value = '';
+    document.getElementById('service').value = '';
+    document.getElementById('date').value = '';
+    document.getElementById('note').value = '';
+    document.querySelectorAll('.slot').forEach(s => s.classList.remove('active'));
+    selectedSlot = null;
+  }
+</script>
+
+</body>
+</html>
